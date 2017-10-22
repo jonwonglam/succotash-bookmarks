@@ -1,10 +1,13 @@
 <template>
   <div>
-      <div>
+      <div class="ui one centered grid">
+        <button class="ui primary button"><i class="plus icon"></i> Add Bookmark</button>
+        <!-- <div class="ui action input">
           <input type="text" v-model="newUrl" @keyup.enter="addBookmark">
-          <button @click="addBookmark">Add</button>
+          <button class="ui button" @click="addBookmark">Add</button>
+        </div> -->
       </div>
-      <div class="card-container">
+      <div class="ui one column centered grid">
         <bookmark v-for="bookmark in bookmarks"
                   :initialBookmark="bookmark" 
                   :key="bookmark.id"
@@ -67,9 +70,4 @@ export default {
 </script>
   
 <style>
-  .card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 </style>

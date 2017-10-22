@@ -1,25 +1,37 @@
 <template>
-  <div>
+  <div class="column center centered aligned">
     <!-- Normal -->
-    <div class="ui card" v-if="!isEditing">
-      <h3>{{ bookmark.title }}</h3>
-      <p>{{ bookmark.url }}</p>
-      <button class="ui button" @click="toggleEdit">Edit</button>
-      <button @click="remove">Remove</button>
+    <div class="ui centered card" v-if="!isEditing">
+      <div class="content">
+        <div class="header">{{ bookmark.title }}</div>
+        <div class="description">{{ bookmark.url }}</div>
+      </div>
+      <div class="extra content">
+        <div class="ui two buttons">
+          <button class="ui basic button" @click="toggleEdit">Edit</button>
+          <button class="ui basic button" @click="remove">Remove</button>
+        </div>
+      </div>
     </div>
     <!-- Edit mode -->
-    <div class="ui card" v-if="isEditing">
-      <div class="card-input">
-        <label>Title: </label>
-        <input type="text" v-model="editTitle"><br>
+    <div class="ui centered card" v-if="isEditing">
+      <div class="content">
+        <div class="ui form left aligned">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" v-model="editTitle" placeholder="Title">
+          </div>
+          <div class="field">
+            <label>Url</label>
+            <input type="text" v-model="editUrl" placeholder="Url">
+          </div>
+        </div>
       </div>
-      <div class="card-input">
-        <label>Url: </label>
-        <input type="text" v-model="editUrl">
-      </div>
-      <div class="buttons">
-        <button @click="cancelEdit">Cancel</button>
-        <button @click="saveEdit">Save</button>
+      <div class="extra content">
+        <div class="ui two buttons">
+          <button class="ui basic button" @click="cancelEdit">Cancel</button>
+          <button class="ui basic button" @click="saveEdit">Save</button>
+        </div>
       </div>
     </div>
     
@@ -60,15 +72,4 @@ export default {
 </script>
 
 <style>
-  .card {
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    width: 350px;
-    padding: 10px;
-  }
-
-  .card-input {
-    margin-bottom: 5px;
-  }
 </style>
