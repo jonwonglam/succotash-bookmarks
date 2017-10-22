@@ -2,15 +2,9 @@
   <div>
       <div class="ui one centered grid">
         <button class="ui primary button"><i class="plus icon"></i> Add Bookmark</button>
-        <!-- <div class="ui action input">
-          <input type="text" v-model="newUrl" @keyup.enter="addBookmark">
-          <button class="ui button" @click="addBookmark">Add</button>
-        </div> -->
       </div>
       <div class="ui one column centered grid">
-        <bookmark v-for="bookmark in bookmarks"
-                  :initialBookmark="bookmark" 
-                  :key="bookmark.id"
+        <bookmark v-for="bookmark in bookmarks" :initialBookmark="bookmark" :key="bookmark.id"
                   @remove="deleteBookmark"
                   @edit="editBookmark"/>
       </div>
