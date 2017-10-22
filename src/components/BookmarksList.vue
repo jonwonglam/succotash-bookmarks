@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import { mapGetters, mapActions } from 'vuex'  // Vuex shorthand for getters and actions
 import Bookmark from './Bookmark'
 import NewBookmark from './NewBookmark'
 
@@ -23,35 +23,17 @@ export default {
     NewBookmark
   },
   methods: {
-    addBookmark: function (b) {
-      let newBookmark = Object.assign({id: this.nextBookmarkId}, b)
-      this.bookmarks.unshift(newBookmark)
-      this.nextBookmarkId++
-    },
-    editBookmark: function (bookmark) {
-      this.$set(this.bookmarks, bookmark, bookmark)
-    },
-    deleteBookmark: function (id) {
-      this.bookmarks = this.bookmarks.filter(bookmark => {
-        return bookmark.id !== id
-      })
-    }
+    ...mapActions([
+      'addBookmark',
+      'deleteBookmark',
+      'editBookmark'
+    ])
+  },
+  computed: {
+    ...mapGetters(['bookmarks'])
   },
   data () {
     return {
-      nextBookmarkId: 3,
-      bookmarks: [  // TODO: Move to vuex
-        {
-          id: 1,
-          title: 'Google',
-          url: 'www.google.com'
-        },
-        {
-          id: 2,
-          title: 'Yahoo',
-          url: 'www.yahoo.com'
-        }
-      ]
     }
   }
 }
