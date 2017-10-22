@@ -1,7 +1,7 @@
 <template>
   <div>
-      <div class="ui one centered grid">
-        <button class="ui primary button"><i class="plus icon"></i> Add Bookmark</button>
+      <div class="ui one column centered grid">
+        <new-bookmark @new="addBookmark"></new-bookmark>
       </div>
       <div class="ui one column centered grid">
         <bookmark v-for="bookmark in bookmarks" :initialBookmark="bookmark" :key="bookmark.id"
@@ -14,24 +14,19 @@
 <script>
 
 import Bookmark from './Bookmark'
+import NewBookmark from './NewBookmark'
 
 export default {
   props: [],  // 1-way data binding to the child. Use $emit to send back up to parent
   components: {
-    Bookmark
+    Bookmark,
+    NewBookmark
   },
   methods: {
-    addBookmark: function () {
-      if (this.newUrl) {
-        let newBookmark = {
-          id: this.newBookmarkId,
-          title: 'null',
-          url: this.newUrl
-        }
-        this.bookmarks.push(newBookmark)
-        this.newBookmarkId++
-        this.newUrl = ''
-      }
+    addBookmark: function (b) {
+      let newBookmark = Object.assign({id: this.nextBookmarkId}, b)
+      this.bookmarks.unshift(newBookmark)
+      this.nextBookmarkId++
     },
     editBookmark: function (bookmark) {
       this.$set(this.bookmarks, bookmark, bookmark)
@@ -44,8 +39,7 @@ export default {
   },
   data () {
     return {
-      newBookmarkId: 3,
-      newUrl: '',
+      nextBookmarkId: 3,
       bookmarks: [  // TODO: Move to vuex
         {
           id: 1,
