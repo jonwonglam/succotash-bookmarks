@@ -21,7 +21,7 @@ const bookmarksModule = {
       title: 'Yahoo',
       url: 'www.yahoo.com'
     }],
-    nextBookmarkId: 2
+    nextBookmarkId: 3
   },
   getters: {
     bookmarks: state => { return state.bookmarks }
